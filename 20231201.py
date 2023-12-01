@@ -1003,14 +1003,65 @@ slhdsxngfxszspppxxfftmxlptzhtwovp1
 4vmzcrhtdvnm6zfive5pkbhcxj
 """
 
+control = """two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen
+"""
+
+map_values = {
+    "one":"1",
+    "two":"2",
+    "three":"3",
+    "four":"4",
+    "five":"5",
+    "six":"6",
+    "seven":"7",
+    "eight":"8",
+    "nine":"9",
+}
+
+def replace_verbose(input, map):
+    for key,value in map.items():
+        input = input.replace(key,value)
+    return input
+
+def find_number(input,map, reverse):
+    agg=''
+    iterable = reversed(input) if reverse else input
+    for letter in iterable:
+        try:
+            return int(letter)
+        except:
+            agg = letter+agg if reverse else agg+letter
+            for key in map_values.keys():
+                if key in agg:
+                    print("AGG", agg)
+                    return map[key]
+        
+
 def aggregate(a,b):
         return a+b
 
+# first star
 def ho_ho_ho(input):
     as_array = input.splitlines()
-    numbers = [''.join(re.findall(r'\d+', entry)) for entry in as_array]
+    numbers = [''.join(re.findall(r'\d+',entry)) for entry in as_array]
+    print(numbers)
     filtered_numbers = [int(f"{n[0]}{n[-1]}") for n in numbers]
     return reduce(aggregate,filtered_numbers)
 
+# second star
+def ho_ho_ho_again(input):
+    as_array = input.splitlines()
+    numbers = [int(f"{find_number(entry,map_values, False)}{find_number(entry,map_values, True)}") for entry in as_array ]
+    return reduce(aggregate,numbers)
 
-print(ho_ho_ho(puzzle_input)) #54390
+# print(ho_ho_ho(puzzle_input)) #54390
+print("solution",ho_ho_ho_again(puzzle_input)) #54277
+
+
+

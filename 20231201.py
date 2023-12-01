@@ -1003,18 +1003,14 @@ slhdsxngfxszspppxxfftmxlptzhtwovp1
 4vmzcrhtdvnm6zfive5pkbhcxj
 """
 
-as_array = puzzle_input.splitlines()
-
-numbers = [''.join(re.findall(r'\d+', entry)) for entry in as_array]
-
-filtered_numbers = [int(f"{n[0]}{n[-1]}") for n in numbers]
-
 def aggregate(a,b):
-    return a+b
+        return a+b
 
-solution = reduce(aggregate,filtered_numbers)
+def ho_ho_ho(input):
+    as_array = input.splitlines()
+    numbers = [''.join(re.findall(r'\d+', entry)) for entry in as_array]
+    filtered_numbers = [int(f"{n[0]}{n[-1]}") for n in numbers]
+    return reduce(aggregate,filtered_numbers)
 
-print(filtered_numbers)
-print(solution) 
 
-#54390
+print(ho_ho_ho(puzzle_input)) #54390

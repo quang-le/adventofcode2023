@@ -1024,11 +1024,6 @@ map_values = {
     "nine":"9",
 }
 
-def replace_verbose(input, map):
-    for key,value in map.items():
-        input = input.replace(key,value)
-    return input
-
 def find_number(input,map, reverse):
     agg=''
     iterable = reversed(input) if reverse else input
@@ -1039,9 +1034,8 @@ def find_number(input,map, reverse):
             agg = letter+agg if reverse else agg+letter
             for key in map_values.keys():
                 if key in agg:
-                    print("AGG", agg)
                     return map[key]
-        
+
 
 def aggregate(a,b):
         return a+b
@@ -1060,7 +1054,7 @@ def ho_ho_ho_again(input):
     numbers = [int(f"{find_number(entry,map_values, False)}{find_number(entry,map_values, True)}") for entry in as_array ]
     return reduce(aggregate,numbers)
 
-# print(ho_ho_ho(puzzle_input)) #54390
+print(ho_ho_ho(puzzle_input)) #54390
 print("solution",ho_ho_ho_again(puzzle_input)) #54277
 
 
